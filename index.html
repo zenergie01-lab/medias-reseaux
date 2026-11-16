@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tirage — L'oracle du travail</title>
+<meta name="description" content="Faites votre tirage de l'oracle du travail : 64 cartes pour éclairer votre parcours professionnel.">
+<meta property="og:title" content="Tirage — L'oracle du travail">
+<meta property="og:image" content="/cartes/dos.webp">
+<meta name="theme-color" content="#141a3a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--night:#141a3a;--night2:#1d2550;--gold:#d8b878;--gold2:#b08a4a;--paper:#fbf6ec;--ink:#2b2433;--soft:#c9c3dc;
+  --f1:#c9a46a;--f2:#2f5fa8;--f3:#8a2f2f;--f4:#5f735c;--f5:#6b2a80}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:#fff;min-height:100vh;
+  background:radial-gradient(1200px 600px at 50% -10%,#2a3470 0%,var(--night) 55%,#0d1128 100%) fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 85% 45%,#f3e2b8 50%,transparent 51%),radial-gradient(1px 1px at 30% 70%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 55% 35%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 18% 88%,#f3e2b8 50%,transparent 51%),radial-gradient(1px 1px at 92% 82%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 45% 92%,#fff 50%,transparent 51%)}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+a{color:var(--gold)}
+.wrap{max-width:980px;margin:0 auto;padding:22px 18px 60px;position:relative}
+header{text-align:center;padding:14px 0 6px}
+.kicker{letter-spacing:.24em;text-transform:uppercase;font-size:.7rem;color:var(--gold);font-weight:600}
+h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.2rem,7vw,3.2rem);line-height:1.05;margin:8px 0 8px}
+.lead{color:var(--soft);max-width:520px;margin:0 auto;font-size:.95rem;line-height:1.55}
+.step{margin-top:28px}
+.step h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.step h2 b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);font-family:Inter;font-size:.8rem}
+.spreads{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.sp{text-align:left;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(216,184,120,.25);transition:all .15s}
+.sp:hover{background:rgba(255,255,255,.09)}
+.sp.on{background:rgba(216,184,120,.16);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.sp .c{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.sp .t{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;line-height:1.15;margin:3px 0 4px}
+.sp .d{font-size:.82rem;color:var(--soft);line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.2);font-size:.8rem;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c);display:inline-block}
+.chip.on{background:#fff;color:var(--ink);border-color:#fff}
+textarea{width:100%;min-height:64px;border-radius:14px;border:1px solid rgba(216,184,120,.35);background:rgba(255,255,255,.06);color:#fff;padding:12px 14px;font:inherit;resize:vertical;outline:none}
+textarea::placeholder{color:#9e98b8}
+.cta{display:flex;justify-content:center;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:999px;font-weight:600;font-size:1rem;text-decoration:none}
+.gold{background:linear-gradient(135deg,#e9cf95,#b9914f);color:#1a1530;box-shadow:0 10px 30px -10px rgba(216,184,120,.7)}
+.ghost{border:1px solid rgba(255,255,255,.3);color:#fff}
+
+/* Table */
+#table{display:none}
+#table.show{display:block}
+.qshow{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:#f3e6c6;margin:6px auto 4px;max-width:620px}
+.qmeta{text-align:center;color:var(--soft);font-size:.82rem;margin-bottom:16px}
+.deck{display:flex;justify-content:center;height:190px;position:relative;margin:10px 0 20px}
+.deck img{position:absolute;width:118px;border-radius:9px;box-shadow:0 10px 24px rgba(0,0,0,.5);transition:transform .45s cubic-bezier(.3,.7,.3,1)}
+.slots{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.slots .slot{width:min(190px,calc((100% - 4*14px)/5))}
+.slots.n1 .slot{width:min(240px,70%)}
+.slots.n3 .slot{width:min(210px,calc((100% - 2*14px)/3))}
+@media(max-width:640px){.pos{height:5.6em;min-height:0;font-size:.64rem;line-height:1.25}.slots{gap:10px}.slots.n5 .slot{width:calc((100% - 2*10px)/3)}.slots.n3 .slot{width:calc((100% - 2*10px)/3)}}
+.slot{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transform:translateY(30px);transition:all .5s}
+.slot.in{opacity:1;transform:none}
+.pos{min-height:3.9em;display:flex;align-items:flex-end;justify-content:center;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:600;text-align:center;min-height:2.6em;line-height:1.3}
+.card3d{width:100%;aspect-ratio:445/710;perspective:1000px;cursor:pointer}
+.flip{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d}
+.slot.open .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;box-shadow:0 14px 30px -10px rgba(0,0,0,.7)}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.front{transform:rotateY(180deg)}
+.slot:not(.open) .card3d:hover .back{box-shadow:0 0 0 2px var(--gold),0 14px 30px -10px rgba(0,0,0,.7)}
+.ctitle{min-height:2.6em;font-size:.82rem;font-weight:600;text-align:center;min-height:1.3em;opacity:0;transition:opacity .4s .5s}
+.slot.open .ctitle{opacity:1}
+.read{font-size:.75rem;color:var(--gold);opacity:0;transition:opacity .4s .6s}
+.slot.open .read{opacity:1}
+.hint{text-align:center;color:var(--soft);font-size:.85rem;margin:18px auto 0;max-width:560px}
+.after{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+
+/* Modal */
+.ov{position:fixed;inset:0;background:rgba(8,10,25,.78);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:14px;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.ov.open{opacity:1;pointer-events:auto}
+.sheet{background:var(--paper);color:var(--ink);width:100%;max-width:760px;max-height:94vh;overflow:auto;border-radius:22px;display:grid;grid-template-columns:260px 1fr;position:relative}
+@media(max-width:700px){.sheet{grid-template-columns:1fr}.sheet .img{max-width:230px;margin:18px auto 0}}
+.sheet .img{padding:18px}
+.sheet .img img{width:100%;border-radius:10px;box-shadow:0 12px 26px -12px rgba(0,0,0,.6);display:block}
+.sheet .txt{padding:22px 24px 22px 6px}
+@media(max-width:700px){.sheet .txt{padding:6px 22px 24px}}
+.x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(43,36,51,.08);font-size:1.3rem;color:var(--ink);z-index:2}
+.fam{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--c)}
+.sheet h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;line-height:1.1;margin:4px 0 2px}
+.pg{font-size:.78rem;color:#6d6377}
+.posb{background:#efe6d4;border-radius:10px;padding:7px 11px;font-size:.84rem;font-weight:500;margin-top:12px}
+.lab{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);font-weight:600;margin:14px 0 6px}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{background:#efe6d4;padding:4px 10px;border-radius:999px;font-size:.8rem}
+.msg{font-size:.96rem;line-height:1.6}
+.adv{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.22rem;line-height:1.4;border-left:3px solid var(--c);padding-left:12px}
+.mnav{display:flex;justify-content:space-between;gap:8px;margin-top:18px}
+.mnav button,.mnav a{padding:10px 14px;border-radius:12px;border:1px solid rgba(43,36,51,.18);font-size:.85rem;font-weight:500;color:var(--ink);text-decoration:none;background:#fff}
+
+footer{text-align:center;color:#9e98b8;font-size:.78rem;line-height:1.6;margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="kicker">L'oracle du travail · Esseline</p>
+  <h1>Faire un tirage</h1>
+  <p class="lead">Respirez, pensez à votre question, puis laissez les cartes vous apporter un éclairage. Gardez votre intuition et votre libre arbitre.</p>
+</header>
+
+<section id="setup">
+  <div class="step">
+    <h2><b>1</b>Choisissez votre tirage</h2>
+    <div class="spreads" id="spreads"></div>
+  </div>
+  <div class="step">
+    <h2><b>2</b>Toutes les cartes ou une famille ?</h2>
+    <div class="chips" id="fams"></div>
+  </div>
+  <div class="step">
+    <h2><b>3</b>Votre question <span style="font-family:Inter;font-size:.8rem;color:var(--soft);font-weight:400">(facultatif)</span></h2>
+    <textarea id="question" maxlength="240"></textarea>
+  </div>
+  <div class="cta"><button class="btn gold" id="go">✦ Mélanger et tirer les cartes</button></div>
+</section>
+
+<section id="table">
+  <p class="qshow" id="qshow"></p>
+  <p class="qmeta" id="qmeta"></p>
+  <div class="deck" id="deck"></div>
+  <div class="slots" id="slots"></div>
+  <p class="hint" id="hint"></p>
+  <div class="after">
+    <button class="btn ghost" id="revealAll">Retourner toutes les cartes</button>
+    <button class="btn gold" id="again">Nouveau tirage</button>
+  </div>
+</section>
+
+<footer>
+  <a href="https://livret-oracle-du-travail.vercel.app" target="_blank" rel="noopener">Consulter le livret et les 64 cartes</a><br>
+  Conception, textes et messages : Esseline Guettier<br>
+  Cet oracle est un outil de réflexion personnelle et de guidance symbolique. Il ne constitue ni une prédiction certaine
+  ni une garantie, et ne remplace pas les conseils de professionnels (juridique, financier, médical ou professionnel).
+  Vous restez libre de vos choix.
+</footer>
+</div>
+
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="x" id="close" aria-label="Fermer">×</button>
+    <div class="img"><img id="mImg" alt=""></div>
+    <div class="txt">
+      <div class="fam" id="mFam"></div>
+      <h3 id="mTitle"></h3>
+      <div class="pg" id="mPage"></div>
+      <div id="mPos"></div>
+      <div class="lab">Mots-clés</div>
+      <div class="kw" id="mKw"></div>
+      <div class="lab">Message divinatoire</div>
+      <p class="msg" id="mMsg"></p>
+      <div class="lab">Conseil spirituel</div>
+      <p class="adv" id="mAdv"></p>
+      <div class="mnav">
+        <button id="mPrev">← Carte précédente</button>
+        <button id="mNext">Carte suivante →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CARDS = [{"n": 1, "titre": "LE NOUVEAU DÉPART", "page": 6, "mots": "Nouveau cycle, opportunité, changement, ouverture, initiative", "message": "Une porte s’ouvre dans votre vie professionnelle. Même si l’inconnu vous inquiète, cette énergie annonce une évolution positive et nécessaire.", "conseil": "Osez quitter l’ancien pour accueillir ce qui résonne davantage avec votre âme."}, {"n": 2, "titre": "LE BLOCAGE", "page": 6, "mots": "Lenteur, obstacle, stagnation, attente", "message": "Quelque chose limite actuellement votre avancée. Ce blocage n’est pas une punition mais une invitation à revoir votre direction ou votre manière d’agir.", "conseil": "Ne forcez pas les choses. Écoutez ce que cette pause cherche à vous enseigner."}, {"n": 3, "titre": "LA RÉUSSITE", "page": 7, "mots": "Victoire, mérite, évolution", "message": "Vos efforts portent leurs fruits. Une reconnaissance, une validation ou une réussite importante approche.", "conseil": "Recevez pleinement ce que vous méritez sans minimiser votre valeur."}, {"n": 4, "titre": "L’AMBITION", "page": 7, "mots": "Motivation, progression, puissance", "message": "Vous êtes appelé(e) à viser plus haut. Votre potentiel demande à être pleinement utilisé.", "conseil": "Avancez avec ambition mais sans perdre votre équilibre intérieur."}, {"n": 5, "titre": "LE BURN-OUT", "page": 8, "mots": "Fatigue, pression, stress, saturation", "message": "Votre corps et votre esprit réclament du repos. Cette carte indique qu’un déséquilibre doit être entendu avant qu’il ne s’aggrave.", "conseil": "Votre valeur ne dépend pas de votre productivité. Prenez soin de votre énergie sacrée."}, {"n": 6, "titre": "LA COMMUNICATION", "page": 8, "mots": "Vérité, écoute, transmission", "message": "Une discussion importante peut débloquer une situation professionnelle. Osez exprimer clairement vos besoins.", "conseil": "Parlez avec authenticité et écoutez avec le cœur."}, {"n": 7, "titre": "L’OPPORTUNITÉ", "page": 9, "mots": "Occasion, proposition, synchronicité, évolution", "message": "Une possibilité inattendue arrive dans votre vie professionnelle. Soyez attentif(ve) aux signes et aux rencontres.", "conseil": "N’ayez pas peur de saisir ce qui se présente à vous."}, {"n": 8, "titre": "LE CONFLIT", "page": 9, "mots": "Rivalité, colère, confrontation, incompréhension", "message": "Des tensions peuvent émerger dans votre environnement professionnel. Une vérité demande à être regardée en face.", "conseil": "Choisissez la paix intérieure plutôt que les luttes d’ego."}, {"n": 9, "titre": "L’ABONDANCE", "page": 10, "mots": "Réussite matérielle, fluidité, richesse", "message": "Une période favorable s’installe. L’abondance peut être financière mais aussi émotionnelle et énergétique.", "conseil": "Accueillez avec gratitude ce que la vie cherche à vous offrir."}, {"n": 10, "titre": "LE DÉPLACEMENT", "page": 10, "mots": "Changement, mobilité, évolution", "message": "Un déplacement physique ou symbolique modifie votre parcours professionnel. Une nouvelle dynamique se met en place.", "conseil": "Acceptez le mouvement de la vie sans résister au changement."}, {"n": 11, "titre": "L’EXPÉRIENCE", "page": 11, "mots": "Apprentissage, maturité, vécu, compétence, connaissance", "message": "Chaque étape traversée vous a préparé(e) à ce que vous vivez aujourd’hui. Votre expérience devient une force.", "conseil": "Honorez votre parcours et les leçons acquises au fil du temps."}, {"n": 12, "titre": "LE CHOIX", "page": 11, "mots": "Hésitation, libre arbitre, réflexion", "message": "Une décision importante approche. Votre âme connaît déjà la réponse même si votre mental hésite encore.", "conseil": "Choisissez ce qui nourrit votre paix intérieure plutôt que vos peurs."}, {"n": 13, "titre": "LA CHANCE", "page": 12, "mots": "Synchronicité, aide, succès, hasard favorable, protection", "message": "Les circonstances jouent actuellement en votre faveur. Une aide invisible semble accompagner votre chemin.", "conseil": "Croyez davantage en la magie des synchronicités."}, {"n": 14, "titre": "LA PATIENCE", "page": 12, "mots": "Calme, confiance, évolution lente, stabilité", "message": "Certaines situations demandent du temps. Même si vous avez l’impression que rien n’avance, des énergies importantes travaillent en coulisses pour préparer votre évolution professionnelle. La patience sera votre meilleure alliée.", "conseil": "Ne cherchez pas à accélérer ce qui doit mûrir naturellement. Ce qui est destiné à vous trouvera au bon moment."}, {"n": 15, "titre": "LA CONFIANCE EN SOI", "page": 13, "mots": "Légitimité, audace, valeur", "message": "Vous possédez déjà les qualités nécessaires pour réussir. Il est temps de croire en vous et de prendre votre place dans votre vie professionnelle.", "conseil": "Votre lumière n’a pas besoin de l’avis des autres pour exister. Faites-vous confiance."}, {"n": 16, "titre": "LE DOUTE", "page": 13, "mots": "Confusion, peur, intuition", "message": "Vous traversez une période de remise en question importante. Cela peut ralentir votre avancée mais il vous pousse aussi à chercher une direction plus alignée avec vos véritables aspirations.", "conseil": "Écoutez votre intuition plus que les peurs de votre mental. Les réponses se trouvent déjà en vous."}, {"n": 17, "titre": "LA CRÉATIVITÉ", "page": 14, "mots": "Idées, talent", "message": "Une nouvelle créativité cherche à émerger dans votre vie professionnelle. Vos idées peuvent ouvrir des portes inattendues et transformer votre avenir.", "conseil": "N’ayez pas peur d’exprimer votre singularité. Ce que vous créez avec le cœur possède une force unique."}, {"n": 18, "titre": "LA RECONNAISSANCE", "page": 14, "mots": "Succès, récompense, validation, estime", "message": "Vos efforts commencent enfin à être reconnus. Cette carte annonce une valorisation personnelle ou professionnelle qui vient confirmer votre évolution.", "conseil": "Recevez ce que la vie vous offre sans minimiser vos talents ni vos accomplissements."}, {"n": 19, "titre": "LE LÂCHER-PRISE", "page": 15, "mots": "Abandon du contrôle, paix, fluidité, confiance, recul", "message": "Vous ne pouvez pas tout contrôler. Une situation se débloquera lorsque vous cesserez de vouloir forcer les choses.", "conseil": "Libérez ce qui pèse sur votre cœur et laissez la vie agir."}, {"n": 20, "titre": "L’AUDACE", "page": 15, "mots": "Mouvement, confiance", "message": "Une opportunité demande du courage. Cette carte annonce qu’il est temps d’agir malgré les peurs.", "conseil": "L’audace ouvre des chemins que la peur empêche de découvrir."}, {"n": 21, "titre": "LA PERSÉVÉRANCE", "page": 16, "mots": "Volonté, patience, discipline", "message": "Même si le chemin semble long, vos efforts finiront par porter leurs fruits. Ne baissez pas les bras maintenant.", "conseil": "Chaque petit pas vous rapproche de votre accomplissement."}, {"n": 22, "titre": "LA PEUR DE L’ÉCHEC", "page": 16, "mots": "Peur, limitation, anxiété, manque de confiance, protection, frein", "message": "La peur d’échouer pourrait vous empêcher de saisir une opportunité importante. Ce blocage vient souvent d’anciennes blessures.", "conseil": "Transformez vos peurs en expérience d’apprentissage."}, {"n": 23, "titre": "L’ÉVOLUTION", "page": 17, "mots": "Changement, transition, maturité, expansion, éveil", "message": "Vous êtes en pleine évolution intérieure et professionnelle. Une ancienne version de vous-même est en train de disparaître.", "conseil": "Acceptez les transformations nécessaires à votre élévation."}, {"n": 24, "titre": "L’ORGANISATION", "page": 17, "mots": "Stabilité, ordre, gestion, efficacité, structure", "message": "Une meilleure organisation vous permettra d’avancer plus sereinement. Il est temps de remettre de l’ordre dans vos priorités et vos pensées.", "conseil": "L’équilibre extérieur commence par l’harmonie intérieure."}, {"n": 25, "titre": "LE REPOS", "page": 18, "mots": "Repos, récupération, recentrage, douceur, énergie", "message": "Votre âme et votre corps ont besoin de ralentir. Cette pause n’est pas un retard mais une étape nécessaire.", "conseil": "Autorisez-vous à vous reposer sans culpabilité."}, {"n": 26, "titre": "L’ÉPANOUISSEMENT", "page": 18, "mots": "Alignement, sérénité, équilibre, réussite", "message": "Vous approchez d’un état d’équilibre et de satisfaction profonde dans votre vie professionnelle et personnelle.", "conseil": "Choisissez ce qui nourrit votre âme plutôt que ce qui nourrit uniquement vos obligations."}, {"n": 27, "titre": "L’ARTISAN", "page": 19, "mots": "Création, précision, passion, talent", "message": "C’est le travail réalisé avec le cœur, la passion et le souci du détail. Vous êtes invité(e) à développer vos talents naturels et votre savoir-faire. Une activité manuelle, créative ou indépendante peut prendre une place importante dans votre évolution.", "conseil": "Faites les choses avec amour."}, {"n": 28, "titre": "LE GUÉRISSEUR", "page": 19, "mots": "Ecoute, aide, intuition, accompagnement", "message": "Vous possédez une énergie capable d’aider et de soutenir les autres. Cette carte peut annoncer un métier tourné vers le soin, l’accompagnement ou le bien-être.", "conseil": "Prenez soin des autres sans oublier de prendre soin de vous-même."}, {"n": 29, "titre": "LE CRÉATEUR", "page": 20, "mots": "Originalité, créativité, nouveauté, vision", "message": "Une idée ou un projet important cherche à naître à travers vous. Cette carte vous encourage à croire en votre potentiel créatif et à oser montrer votre univers.", "conseil": "Votre créativité est une énergie sacrée destinée à être exprimée."}, {"n": 30, "titre": "L’ENSEIGNANT", "page": 20, "mots": "Connaissance, pédagogie, guidance, apprentissage, expérience", "message": "Vous avez quelque chose d’important à transmettre. Cette carte annonce une période favorable au partage des connaissances et à l’accompagnement.", "conseil": "Les expériences que vous avez traversées peuvent devenir une lumière pour les autres."}, {"n": 31, "titre": "L’EXPLORATEUR", "page": 21, "mots": "Liberté, mouvement, changement, évolution", "message": "Une nouvelle expérience professionnelle ou personnelle vous appelle. Cette carte annonce une ouverture vers de nouveaux horizons.", "conseil": "Osez sortir de votre zone de confort pour découvrir votre véritable potentiel."}, {"n": 32, "titre": "LE COMMUNICANT", "page": 21, "mots": "Communication, parole, réseau, relation, transmission", "message": "Vos paroles et votre manière de communiquer auront un impact important. Une discussion, un contact ou une opportunité relationnelle peut faire évoluer votre situation professionnelle.", "conseil": "Exprimez-vous avec authenticité et bienveillance."}, {"n": 33, "titre": "L’ENTREPRENEUR", "page": 22, "mots": "Projet, leadership, création, réussite", "message": "Cette carte annonce une énergie favorable à la création de projets et à l’autonomie professionnelle. Vous êtes invité(e) à croire davantage en vos capacités de réussite.", "conseil": "Faites confiance à votre vision et osez construire ce qui vous ressemble."}, {"n": 34, "titre": "LE SPIRITUEL", "page": 22, "mots": "Intuition, spiritualité, conscience, énergie, mission", "message": "Votre travail doit être aligné avec vos valeurs profondes. Cette carte indique un besoin de sens et une connexion plus forte avec votre mission de vie.", "conseil": "Écoutez votre âme avant d’écouter les attentes extérieures."}, {"n": 35, "titre": "LE PROTECTEUR", "page": 23, "mots": "Stabilité, soutien, responsabilité, force, loyauté", "message": "Vous jouez un rôle important auprès des autres. Cette carte évoque la protection, la stabilité et la capacité à rassurer votre entourage professionnel ou personnel.", "conseil": "Protégez les autres sans porter leurs fardeaux à leur place."}, {"n": 36, "titre": "LE BÂTISSEUR", "page": 23, "mots": "Travail, stabilité, persévérance, projet, évolution", "message": "Vous êtes en train de construire quelque chose de durable. Même si les résultats semblent lents, vos efforts créent des bases solides pour l’avenir.", "conseil": "Chaque étape compte dans la réalisation de vos projets."}, {"n": 37, "titre": "LE MÉDIATEUR", "page": 24, "mots": "Apaisement, dialogue, compréhension, union", "message": "Cette carte annonce une capacité à calmer les tensions et à rétablir l’équilibre dans une situation conflictuelle.", "conseil": "Cherchez la compréhension plutôt que la confrontation."}, {"n": 38, "titre": "LE STRATÈGE", "page": 24, "mots": "Réflexion, analyse, vision, préparation, réussite", "message": "Vous êtes invité(e) à agir avec intelligence et recul. Une bonne préparation vous permettra d’atteindre vos objectifs plus efficacement.", "conseil": "Prenez le temps d’observer avant d’agir."}, {"n": 39, "titre": "L'APPRENTISSAGE", "page": 25, "mots": "Formation, savoir, évolution, curiosité", "message": "Qu'il s'agisse d'une formation, d'une expérience.., cette période favorise l'acquisition de nouvelles compétences. Chaque connaissance reçue aujourd'hui prépare les opportunités de demain.", "conseil": "Chaque expérience contient une leçon précieuse pour votre évolution."}, {"n": 40, "titre": "LA VOCATION", "page": 25, "mots": "Sens, destinée, passion, accomplissement, intuition", "message": "Votre âme cherche à vous rapprocher d’un travail plus aligné avec vos valeurs profondes. Une prise de conscience importante approche.", "conseil": "Écoutez ce qui fait vibrer votre cœur plutôt que les attentes extérieures."}, {"n": 41, "titre": "L'OBJECTIF", "page": 26, "mots": "Ambition, détermination, réussite, concentration, vision", "message": "Plus votre vision sera précise, plus les opportunités nécessaires se présenteront naturellement sur votre chemin.", "conseil": "Concentrez votre énergie sur ce que vous souhaitez construire plutôt que sur ce que vous craignez."}, {"n": 42, "titre": "LA PROMOTION", "page": 26, "mots": "Valorisation, progression, mérite, responsabilité", "message": "Vos efforts sont observés et appréciés. Une évolution professionnelle, une augmentation de responsabilités peut se présenter prochainement.", "conseil": "Recevez pleinement ce que vous méritez sans minimiser votre valeur."}, {"n": 43, "titre": "LA RECONVERSION", "page": 27, "mots": "Evolution, réorientation, courage, renaissance", "message": "Un changement professionnel important peut se présenter. Cette carte annonce la possibilité d’un nouveau départ plus aligné avec vos aspirations.", "conseil": "N’ayez pas peur de recommencer autrement lorsque votre âme réclame du changement."}, {"n": 44, "titre": "LES PAPIERS", "page": 27, "mots": "Signature, démarches, contrat", "message": "Des documents nécessite une attention particulière, contrats, formalités administratives. Une validation peut se concrétiser prochainement.", "conseil": "Prenez le temps de lire et comprendre chaque détail avant de vous engager."}, {"n": 45, "titre": "L'AUTO-ENTREPRENEUR", "page": 28, "mots": "Entrepreneuriat, initiative, projet, responsabilité", "message": "Une énergie favorable à l'indépendance et à la création de votre propre activité. Elle vous invite à croire davantage en vos capacités.", "conseil": "Osez construire un projet qui reflète pleinement qui vous êtes."}, {"n": 46, "titre": "LE CONTRAT", "page": 28, "mots": "Partenariat, sécurité, engagement, confiance, officialisation", "message": "Une alliance, un partenariat ou un engagement important est favorisé. Cette carte annonce une forme de stabilité et de concrétisation.", "conseil": "Engagez-vous uniquement dans ce qui respecte vos valeurs profondes."}, {"n": 47, "titre": "LE TÉLÉTRAVAIL", "page": 29, "mots": "Equilibre, confort, adaptation, indépendance, organisation", "message": "Une nouvelle façon de travailler peut améliorer votre qualité de vie. Cette carte favorise l'autonomie et la recherche d'un meilleur équilibre.", "conseil": "Créez un environnement professionnel respectueux de votre bien-être."}, {"n": 48, "titre": "LA RUPTURE", "page": 29, "mots": "Changement, détachement, transition, reconstruction, renouveau", "message": "Une séparation ou une fin de situation ouvre la voie à un nouveau départ. Même si cette étape semble difficile, elle prépare quelque chose de plus juste pour vous.", "conseil": "Laissez partir ce qui n'a plus sa place afin d'accueillir le renouveau."}, {"n": 49, "titre": "LA JUSTICE", "page": 30, "mots": "Honnêteté, responsabilité, décision, vérité, discernement", "message": "Une situation trouve progressivement son équilibre. La vérité finit toujours par émerger, même lorsqu'elle semble momentanément cachée.", "conseil": "Restez fidèle à vos valeurs quelles que soient les circonstances."}, {"n": 50, "titre": "LE BÉNÉVOLAT", "page": 30, "mots": "Partage, compassion, humanité, altruisme", "message": "Cette carte rappelle que donner avec le cœur enrichit autant celui qui reçoit que celui qui offre. Un engagement désintéressé pourrait vous apporter de belles récompenses inattendues.", "conseil": "Donnez avec amour mais sans vous oublier."}, {"n": 51, "titre": "LE PROJET", "page": 31, "mots": "Objectif, ambition, développement, organisation, réussite", "message": "Une idée, un rêve ou une aspiration cherche à prendre forme dans votre vie. Cette carte annonce une période favorable à la construction et à la concrétisation.", "conseil": "Croyez en ce que vous construisez. Les plus belles réalisations commencent toujours par une simple idée."}, {"n": 52, "titre": "L’ÉQUILIBRE", "page": 31, "mots": "Sérénité, paix, organisation, bien-être", "message": "Cette carte annonce la recherche d’un meilleur équilibre entre votre vie professionnelle, émotionnelle et personnelle.", "conseil": "Ne sacrifiez plus votre paix intérieure pour répondre aux attentes extérieures."}, {"n": 53, "titre": "L'AUTO-SABOTAGE", "page": 32, "mots": "Peur de réussir, manque de confiance, procrastination, doute, dévalorisation", "message": "Tu possèdes les capacités nécessaires pour avancer, tes peurs peuvent te retenir. Il est temps de prendre conscience de ce qui t'empêche d'avancer.", "conseil": "Cesse de te diminuer pour rester dans une situation connue. Tu as le droit de réussir, d'être reconnu et de prendre ta place."}, {"n": 54, "titre": "LE DESTIN", "page": 32, "mots": "Vocation, synchronicités, rencontres, opportunités, orientation, accomplissement", "message": "Une nouvelle direction peut se dessiner, parfois là où tu ne l'attendais pas.", "conseil": "Fais confiance à ton chemin destin, il peut ouvrir des portes, mais c'est à toi de choisir de les franchir."}, {"n": 55, "titre": "LA MISSION D’ÂME", "page": 33, "mots": "Réalisation, transmission, alignement, talents", "message": "Tes talents, tes expériences et tes qualités peuvent te conduire vers une activité qui correspond davantage à ce que tu es profondément.", "conseil": "Tu as quelque chose à apporter au monde. Ose reconnaître tes capacités."}, {"n": 56, "titre": "LA TRANSFORMATION", "page": 33, "mots": "Métamorphose, renouveau, libération, nouveau départ", "message": "Une nouvelle version de toi demande à émerger.", "conseil": "N'aie pas peur de laisser derrière toi ce qui ne te correspond plus."}, {"n": 57, "titre": "LE GUIDE", "page": 34, "mots": "Conseil, enseignement, rencontre, sagesse, orientation", "message": "Une personne peut jouer un rôle important dans ton évolution professionnelle.", "conseil": "Accepte de recevoir de l'aide. Tu n'as pas besoin de tout apprendre seul. Reste attentif aux personnes qui croisent ton chemin."}, {"n": 58, "titre": "LA FOI", "page": 34, "mots": "Persévérance, espérance, courage, patience, conviction", "message": "Une période d'incertitude peut précéder une belle évolution. Continue à avancer sans laisser le doute prendre toute la place.", "conseil": "Garde confiance en toi et en la vie."}, {"n": 59, "titre": "LA PROTECTION", "page": 35, "mots": "Soutien, vigilance, préservation, limites, prudence", "message": "Certaines situations demandent du discernement. Une aide, un soutien ou une solution protectrice peut se présenter.", "conseil": "Protège ton énergie, pose tes limites et ne laisse personne empiéter sur ta valeur."}, {"n": 60, "titre": "L’INTUITION", "page": 35, "mots": "Perception, inspiration, instinct, clairvoyance, écoute intérieure", "message": "Une situation professionnelle mérite que tu écoutes davantage ton ressenti.", "conseil": "Prends le temps de t'écouter. Fais la différence entre ton intuition, tes peurs et tes attentes."}, {"n": 61, "titre": "LA PAIX INTÉRIEURE", "page": 36, "mots": "Harmonie, stabilité émotionnelle, lâcher-prise", "message": "Tu entres dans une période où tu ressens le besoin de retrouver un équilibre entre ta vie professionnelle et personnelle.", "conseil": "Ne sacrifie pas ton bien-être pour répondre aux attentes des autres."}, {"n": 62, "titre": "L’HÉRITAGE", "page": 36, "mots": "Générations, héritage, savoir-faire, mémoire, répétition", "message": "Ton parcours professionnel peut être influencé par ton histoire familiale. Une transmission familiale peut également t'ouvrir une voie professionnelle.", "conseil": "Tu as le droit de construire ton propre chemin."}, {"n": 63, "titre": "L’EMPRISE", "page": 37, "mots": "Manipulation, domination, contrôle, peur, soumission, perte de liberté", "message": "Cette carte peut également représenter une dépendance financière ou la peur de quitter une situation inconfortable.", "conseil": "Reprends progressivement ton pouvoir personnel. Tu as le droit de dire non."}, {"n": 64, "titre": "LA TRAHISON", "page": 37, "mots": "Mensonge, déception, confiance brisée, injustice, révélation, méfiance", "message": "Une promesse non tenue, une confidence répétée, une collaboration décevante ou un manque de loyauté peut être mis en lumière.", "conseil": "Ne laisse pas une trahison détruire ta capacité à faire confiance. Ta valeur ne dépend pas du comportement des autres."}];
+const FAMILIES = [
+  {id:1,name:"Les énergies du travail",from:1,to:13,color:"var(--f1)"},
+  {id:2,name:"Le développement personnel",from:14,to:26,color:"var(--f2)"},
+  {id:3,name:"Les branches métiers",from:27,to:38,color:"var(--f3)"},
+  {id:4,name:"Le monde du travail",from:39,to:51,color:"var(--f4)"},
+  {id:5,name:"Le chemin spirituel",from:52,to:64,color:"var(--f5)"}
+];
+const SPREADS = [
+  {name:"Le message du jour",n:1,desc:"Une tendance générale pour votre journée professionnelle.",q:"Quelle énergie accompagne ma journée professionnelle ?",pos:["Le message du jour"],outro:"La carte tirée vous apporte un éclairage, un conseil ou un point de vigilance pour la journée."},
+  {name:"Ma situation professionnelle",n:3,desc:"Mieux comprendre une situation actuelle : emploi, activité, période d'incertitude.",pos:["Ma situation actuelle","Ce qui favorise ou freine mon évolution","Le conseil pour avancer"],outro:"Ce tirage est idéal pour faire le point sur son emploi, son activité ou une période d'incertitude."},
+  {name:"Mon avenir professionnel",n:5,desc:"Explorer les possibilités d'évolution et identifier les pistes.",pos:["Où j'en suis aujourd'hui","Ce qui me bloque","Les opportunités qui peuvent se présenter","L'évolution possible","Le conseil pour construire mon avenir"],outro:"Il permet de prendre du recul et d'identifier les pistes à explorer."},
+  {name:"Une décision importante",n:3,desc:"Démission, reconversion, proposition ou changement de poste.",pos:["Ce que représente ma situation actuelle","Ce que je dois prendre en considération avant de décider","Le conseil pour faire un choix éclairé"],outro:"Ce tirage ne décide pas à votre place. Il vous aide à réfléchir aux conséquences, aux possibilités et à vos véritables besoins."}
+];
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const img = n => `/cartes/${String(n).padStart(2,'0')}.webp`;
+const famOf = n => FAMILIES.find(f => n>=f.from && n<=f.to);
+const LIVRET = "https://livret-oracle-du-travail.vercel.app";
+
+let spread = 0, fam = 0, drawn = [];
+const params = new URLSearchParams(location.search);
+const pT = +params.get('tirage'); if (pT>=1 && pT<=4) spread = pT-1;
+
+/* ---- setup UI ---- */
+function renderSetup(){
+  $('#spreads').innerHTML = SPREADS.map((s,i)=>`<button class="sp ${i===spread?'on':''}" data-i="${i}">
+    <div class="c">Tirage ${i+1} · ${s.n} carte${s.n>1?'s':''}</div><div class="t">${s.name}</div><div class="d">${s.desc}</div></button>`).join('');
+  $('#fams').innerHTML = `<button class="chip ${fam===0?'on':''}" data-f="0">Les 64 cartes</button>` +
+    FAMILIES.map(f=>`<button class="chip ${fam===f.id?'on':''}" style="--c:${f.color}" data-f="${f.id}"><i></i>${f.name}</button>`).join('');
+  $('#question').placeholder = SPREADS[spread].q || "Ex. : Est-ce le bon moment pour changer de poste ?";
+}
+$('#spreads').onclick = e => { const b=e.target.closest('.sp'); if(b){spread=+b.dataset.i; renderSetup();} };
+$('#fams').onclick = e => { const b=e.target.closest('.chip'); if(b){fam=+b.dataset.f; renderSetup();} };
+renderSetup();
+
+/* ---- draw ---- */
+function shuffle(pool){
+  const a = new Uint32Array(pool.length); crypto.getRandomValues(a);
+  for (let i=pool.length-1;i>0;i--){ const j=a[i]%(i+1); [pool[i],pool[j]]=[pool[j],pool[i]]; }
+  return pool;
+}
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+async function draw(){
+  const s = SPREADS[spread];
+  const pool = CARDS.map(c=>c.n).filter(n=>!fam || famOf(n).id===fam);
+  drawn = shuffle(pool).slice(0, s.n);
+  drawn.forEach(n => { const i=new Image(); i.src=img(n); });
+
+  $('#setup').style.display='none';
+  $('#table').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const q = $('#question').value.trim() || s.q || '';
+  $('#qshow').textContent = q ? `« ${q} »` : '';
+  $('#qmeta').textContent = `Tirage ${spread+1} – ${s.name}` + (fam ? ` · ${famOf(FAMILIES[fam-1].from).name}` : '');
+  $('#hint').textContent = ''; $('#slots').innerHTML='';
+  $('#revealAll').style.display='none';
+
+  // shuffle animation
+  const deck = $('#deck'); deck.style.display='flex';
+  deck.innerHTML = Array.from({length:7},()=>`<img src="/cartes/dos.webp" alt="">`).join('');
+  const cards = [...deck.children];
+  for (let r=0;r<3;r++){
+    cards.forEach((c,i)=>{ c.style.transform=`translateX(${(i-3)*(r%2?-14:14)}px) rotate(${(i-3)*(r%2?-5:5)}deg)`; });
+    await wait(330);
+    cards.forEach(c=>c.style.transform='none');
+    await wait(260);
+  }
+  deck.style.display='none';
+
+  const slots = $('#slots');
+  slots.className = `slots n${s.n}`; slots.style.setProperty('--n', s.n);
+  slots.innerHTML = drawn.map((n,i)=>`
+    <div class="slot" data-i="${i}">
+      <div class="pos">${s.n>1?(i+1)+'. ':''}${esc(s.pos[i])}</div>
+      <div class="card3d" role="button" tabindex="0" aria-label="Retourner la carte ${i+1}">
+        <div class="flip">
+          <div class="face back"><img src="/cartes/dos.webp" alt=""></div>
+          <div class="face front"><img src="${img(n)}" alt="Carte n°${n} : ${esc(CARDS[n-1].titre)}"></div>
+        </div>
+      </div>
+      <div class="ctitle">${n}. ${esc(CARDS[n-1].titre)}</div>
+      <div class="read">Lire le message →</div>
+    </div>`).join('');
+  [...slots.children].forEach((el,i)=>setTimeout(()=>el.classList.add('in'), 120*i+60));
+  $('#hint').textContent = 'Touchez chaque carte pour la retourner, puis touchez-la à nouveau pour lire son message. ' + s.outro;
+  if (s.n>1) $('#revealAll').style.display='';
+}
+$('#go').onclick = draw;
+$('#again').onclick = () => { $('#table').classList.remove('show'); $('#setup').style.display=''; window.scrollTo({top:0,behavior:'smooth'}); };
+$('#revealAll').onclick = () => document.querySelectorAll('.slot').forEach((el,i)=>setTimeout(()=>el.classList.add('open'),i*180));
+
+function onSlot(el){
+  const i=+el.dataset.i;
+  if(!el.classList.contains('open')) el.classList.add('open'); else openCard(i);
+}
+$('#slots').addEventListener('click', e=>{ const el=e.target.closest('.slot'); if(el && (e.target.closest('.card3d')||e.target.closest('.read')||e.target.closest('.ctitle'))) onSlot(el); });
+$('#slots').addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && e.target.closest('.card3d')){ e.preventDefault(); onSlot(e.target.closest('.slot')); } });
+
+/* ---- modal ---- */
+let cur = 0;
+function openCard(i){
+  cur = i; const n = drawn[i], c = CARDS[n-1], f = famOf(n), s = SPREADS[spread];
+  const sh = $('.sheet'); sh.style.setProperty('--c', f.color);
+  $('#mImg').src = img(n); $('#mImg').alt = `Carte n°${n} : ${c.titre}`;
+  $('#mFam').textContent = `Famille ${f.id} · ${f.name}`;
+  $('#mTitle').textContent = `${n}. ${c.titre}`;
+  $('#mPage').innerHTML = `Page ${c.page} du livret · <a href="${LIVRET}/#carte-${n}" target="_blank" rel="noopener" style="color:#8a6a33">voir dans le livret</a>`;
+  $('#mPos').innerHTML = `<div class="posb">${s.n>1?'Position '+(i+1)+' : ':''}${esc(s.pos[i])}</div>`;
+  $('#mKw').innerHTML = c.mots.split(/\s*,\s*/).filter(Boolean).map(k=>`<span>${esc(k)}</span>`).join('');
+  $('#mMsg').textContent = c.message; $('#mAdv').textContent = c.conseil;
+  $('#mPrev').style.visibility = i>0 ? 'visible':'hidden';
+  $('#mNext').style.visibility = i<drawn.length-1 ? 'visible':'hidden';
+  document.querySelectorAll('.slot')[i]?.classList.add('open');
+  $('#ov').classList.add('open'); $('#ov').setAttribute('aria-hidden','false'); sh.scrollTop=0;
+}
+function closeCard(){ $('#ov').classList.remove('open'); $('#ov').setAttribute('aria-hidden','true'); }
+$('#close').onclick = closeCard;
+$('#ov').onclick = e => { if(e.target.id==='ov') closeCard(); };
+$('#mPrev').onclick = () => cur>0 && openCard(cur-1);
+$('#mNext').onclick = () => cur<drawn.length-1 && openCard(cur+1);
+document.addEventListener('keydown', e=>{ if(!$('#ov').classList.contains('open')) return;
+  if(e.key==='Escape') closeCard(); if(e.key==='ArrowLeft'&&cur>0) openCard(cur-1); if(e.key==='ArrowRight'&&cur<drawn.length-1) openCard(cur+1); });
+</script>
+</body>
+</html>
