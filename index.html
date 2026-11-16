@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Livret Carte Esseline — L'oracle du travail</title>
+<title>Livret — L'oracle du travail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -142,7 +142,6 @@ footer a{color:var(--ink)}
     <nav>
       <button data-tab="livret" class="on">Le livret</button>
       <button data-tab="cartes">Les 64 cartes</button>
-      <button data-tab="tirage">Tirage</button>
     </nav>
   </div>
 </header>
@@ -168,6 +167,7 @@ footer a{color:var(--ink)}
     </form>
     <div class="err" id="numErr"></div>
   </div>
+  <p style="text-align:center;margin-top:14px"><a class="btn light" style="text-decoration:none" href="https://tirage-oracle-du-travail.vercel.app" target="_blank" rel="noopener">✦ Faire un tirage en ligne</a></p>
 
   <h2><span class="n">I.</span>Les cinq familles de votre oracle</h2>
   <div class="grid2" id="famBlocks"></div>
@@ -191,6 +191,7 @@ footer a{color:var(--ink)}
 
   <div style="text-align:center;margin-top:34px">
     <button class="btn dark" data-goto="cartes">Accéder aux 64 cartes →</button>
+    <a class="btn light" style="text-decoration:none;margin-left:6px" href="https://tirage-oracle-du-travail.vercel.app" target="_blank" rel="noopener">Faire un tirage →</a>
   </div>
 </section>
 
@@ -204,19 +205,6 @@ footer a{color:var(--ink)}
   <div id="index"></div>
 </section>
 
-<!-- =================== TIRAGE =================== -->
-<section id="tirage" hidden>
-  <h2 style="margin-top:6px">Faire un tirage</h2>
-  <p style="color:var(--soft);margin-bottom:16px">Posez votre question, choisissez un tirage, puis retournez les cartes une à une.</p>
-  <div class="drawpick">
-    <select id="spreadSel"></select>
-    <select id="famSel"><option value="0">Toutes les familles</option></select>
-    <button class="btn dark" id="drawBtn">Tirer les cartes</button>
-  </div>
-  <p class="hint" id="spreadQ"></p>
-  <div class="spreadout" id="spreadOut"></div>
-  <p class="hint" id="spreadHint"></p>
-</section>
 </main>
 
 <footer>
@@ -297,9 +285,8 @@ $('#spreadBlocks').innerHTML = SPREADS.map((s,i) => `
     ${s.q?`<p class="q">Question : ${s.q}</p>`:''}
     ${s.n>1?`<ol>${s.pos.map(p=>`<li>${p}</li>`).join('')}</ol>`:''}
     <p>${s.outro}</p>
-    <button class="btn light go" data-spread="${i}">Faire ce tirage →</button>
+    <a class="btn light go" href="https://tirage-oracle-du-travail.vercel.app/?tirage=${i+1}" target="_blank" rel="noopener" style="text-decoration:none">Faire ce tirage en ligne →</a>
   </div>`).join('');
-document.querySelectorAll('[data-spread]').forEach(b => b.onclick = () => { $('#spreadSel').value = b.dataset.spread; prepSpread(); show('tirage'); });
 
 /* ---------- Find by number ---------- */
 $('#numForm').onsubmit = e => {
@@ -376,39 +363,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft' && current > 1) openCard(current-1);
   if (e.key === 'ArrowRight' && current < 64) openCard(current+1);
 });
-
-/* ---------- Tirage ---------- */
-$('#spreadSel').innerHTML = SPREADS.map((s,i) => `<option value="${i}">${s.name} (${s.n} carte${s.n>1?'s':''})</option>`).join('');
-$('#famSel').innerHTML += FAMILIES.map(f => `<option value="${f.id}">Famille ${f.id} – ${f.name}</option>`).join('');
-let drawn = [];
-function prepSpread(){
-  const s = SPREADS[+$('#spreadSel').value];
-  $('#spreadQ').textContent = s.q ? `Question : ${s.q}` : s.intro;
-  $('#spreadOut').innerHTML = ''; $('#spreadHint').textContent = '';
-}
-$('#spreadSel').onchange = prepSpread; prepSpread();
-$('#drawBtn').onclick = () => {
-  const s = SPREADS[+$('#spreadSel').value], fid = +$('#famSel').value;
-  let pool = CARDS.map(c => c.n).filter(n => !fid || famOf(n).id === fid);
-  const a = new Uint32Array(pool.length); crypto.getRandomValues(a);
-  for (let i = pool.length-1; i > 0; i--) { const j = a[i] % (i+1); [pool[i],pool[j]] = [pool[j],pool[i]]; }
-  drawn = pool.slice(0, s.n);
-  $('#spreadOut').innerHTML = drawn.map((n,i) => {
-    const c = CARDS[n-1], f = famOf(n);
-    return `<div class="slot" style="--c:${f.color}" data-i="${i}">
-      <div class="flip">
-        <div class="face back"><b>${i+1}</b><small>${esc(s.pos[i])}</small></div>
-        <div class="face front"><div class="p">${i+1}. ${esc(s.pos[i])}</div><div class="no">n°${n}</div><div class="t">${esc(c.titre)}</div><div class="more">Lire le message →</div></div>
-      </div></div>`;
-  }).join('');
-  $('#spreadHint').textContent = 'Touchez une carte pour la retourner, puis touchez-la à nouveau pour lire son message. ' + s.outro;
-};
-$('#spreadOut').onclick = e => {
-  const slot = e.target.closest('.slot'); if (!slot) return;
-  const i = +slot.dataset.i, s = SPREADS[+$('#spreadSel').value];
-  if (!slot.classList.contains('shown')) slot.classList.add('shown');
-  else openCard(drawn[i], `${i+1}. ${s.pos[i]}`);
-};
 
 /* ---------- Deep link #carte-12 ---------- */
 const m = location.hash.match(/^#carte-(\d{1,2})$/);
