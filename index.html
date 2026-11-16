@@ -97,6 +97,33 @@ textarea::placeholder{color:#9e98b8}
 .mnav{display:flex;justify-content:space-between;gap:8px;margin-top:18px}
 .mnav button,.mnav a{padding:10px 14px;border-radius:12px;border:1px solid rgba(43,36,51,.18);font-size:.85rem;font-weight:500;color:var(--ink);text-decoration:none;background:#fff}
 
+/* Commande */
+.topcta{position:absolute;top:18px;right:18px;font-size:.8rem;padding:9px 14px}
+@media(max-width:640px){.topcta{position:static;margin:0 auto 6px;display:flex;width:max-content}}
+.order{margin-top:56px;border-radius:24px;border:1px solid rgba(216,184,120,.45);background:linear-gradient(160deg,rgba(216,184,120,.14),rgba(255,255,255,.03));padding:26px 22px;scroll-margin-top:16px}
+.ohead{display:grid;grid-template-columns:180px 1fr;gap:22px;align-items:center}
+@media(max-width:640px){.ohead{grid-template-columns:1fr;text-align:center}}
+.fan{position:relative;height:170px;width:180px;margin:0 auto}
+.fan img{position:absolute;bottom:0;left:50%;width:92px;border-radius:7px;box-shadow:0 10px 22px rgba(0,0,0,.5);transform-origin:50% 100%}
+.order h2{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1.1;font-weight:600}
+.badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#e9cf95,#b9914f);color:#1a1530;font-weight:700;border-radius:999px;padding:6px 14px;font-size:.85rem;margin:10px 0 8px}
+.code{font-family:ui-monospace,Menlo,monospace;background:rgba(26,21,48,.15);padding:2px 8px;border-radius:6px;letter-spacing:.05em}
+.order .ol{color:var(--soft);font-size:.92rem;line-height:1.55}
+form.of{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+@media(max-width:640px){form.of{grid-template-columns:1fr}}
+.of label{display:flex;flex-direction:column;gap:6px;font-size:.8rem;color:var(--soft);font-weight:500}
+.of .full{grid-column:1/-1}
+.of input,.of textarea,.of select{width:100%;border-radius:12px;border:1px solid rgba(216,184,120,.35);background:rgba(255,255,255,.07);color:#fff;padding:11px 13px;font:inherit;font-size:.95rem;outline:none}
+.of select option{color:#1a1530}
+.of input:focus,.of textarea:focus,.of select:focus{border-color:var(--gold)}
+.of .chk{flex-direction:row;align-items:flex-start;gap:10px;font-size:.8rem;line-height:1.45}
+.of .chk input{width:auto;margin-top:3px}
+.of .hp{position:absolute;left:-9999px}
+.of .send{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.status{font-size:.88rem}
+.status.ok{color:#bfe3b0}.status.err{color:#ffb4a8}
+.thanks{text-align:center;padding:26px 10px}
+.thanks h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:8px}
 footer{text-align:center;color:#9e98b8;font-size:.78rem;line-height:1.6;margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -104,6 +131,7 @@ footer{text-align:center;color:#9e98b8;font-size:.78rem;line-height:1.6;margin-t
 <body>
 <div class="wrap">
 <header>
+  <a class="btn gold topcta" href="#commander">✦ Commander le jeu</a>
   <p class="kicker">L'oracle du travail · Esseline</p>
   <h1>Faire un tirage</h1>
   <p class="lead">Respirez, pensez à votre question, puis laissez les cartes vous apporter un éclairage. Gardez votre intuition et votre libre arbitre.</p>
@@ -137,8 +165,51 @@ footer{text-align:center;color:#9e98b8;font-size:.78rem;line-height:1.6;margin-t
   </div>
 </section>
 
+<section class="order" id="commander">
+  <div class="ohead">
+    <div class="fan" aria-hidden="true">
+      <img src="/cartes/dos.webp" alt="" style="transform:translateX(-50%) rotate(-14deg)">
+      <img src="/cartes/01.webp" alt="" style="transform:translateX(-50%) rotate(0deg)">
+      <img src="/cartes/55.webp" alt="" style="transform:translateX(-50%) rotate(14deg)">
+    </div>
+    <div>
+      <p class="kicker">Le jeu de cartes</p>
+      <h2>Commandez votre oracle du travail</h2>
+      <div class="badge">Offre spéciale −10 % · code <span class="code">ORACLE10</span></div>
+      <p class="ol">Les 64 cartes illustrées et leur livret d'accompagnement. Remplissez le formulaire : Esseline vous répond par e-mail pour confirmer votre commande, le montant (remise déduite) et les modalités de paiement et de livraison.</p>
+    </div>
+  </div>
+
+  <form class="of" id="orderForm" novalidate>
+    <label>Nom et prénom *<input name="nom" autocomplete="name" required></label>
+    <label>E-mail *<input name="email" type="email" autocomplete="email" required></label>
+    <label>Téléphone *<input name="telephone" type="tel" autocomplete="tel" required></label>
+    <label>Nombre de jeux *
+      <select name="quantite" required>
+        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option value="Plus de 5">Plus de 5</option>
+      </select>
+    </label>
+    <label class="full">Adresse de livraison *<input name="adresse" autocomplete="street-address" required></label>
+    <label>Code postal *<input name="code_postal" autocomplete="postal-code" required></label>
+    <label>Ville *<input name="ville" autocomplete="address-level2" required></label>
+    <label>Pays *<input name="pays" autocomplete="country-name" value="France" required></label>
+    <label>Code promo<input name="code_promo" value="ORACLE10"></label>
+    <label class="full">Message (facultatif)<textarea name="message" rows="3" placeholder="Une question, une précision pour la livraison…"></textarea></label>
+    <label class="hp" aria-hidden="true">Ne pas remplir<input name="_honey" tabindex="-1" autocomplete="off"></label>
+    <label class="full chk"><input type="checkbox" name="consentement" value="oui" required>
+      J'accepte que ces informations soient transmises à Esseline Guettier pour traiter ma commande. Elles ne servent qu'à cela et ne sont pas cédées à des tiers.</label>
+    <div class="send">
+      <button class="btn gold" type="submit" id="sendBtn">Envoyer ma commande</button>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+  <div class="thanks" id="thanks" hidden>
+    <h3>Merci, votre commande est bien envoyée ✦</h3>
+    <p class="ol">Esseline vous répondra très vite par e-mail pour confirmer le montant et l'envoi de votre jeu.</p>
+  </div>
+</section>
+
 <footer>
-  <a href="https://livret-oracle-du-travail.vercel.app" target="_blank" rel="noopener">Consulter le livret et les 64 cartes</a><br>
   Conception, textes et messages : Esseline Guettier<br>
   Cet oracle est un outil de réflexion personnelle et de guidance symbolique. Il ne constitue ni une prédiction certaine
   ni une garantie, et ne remplace pas les conseils de professionnels (juridique, financier, médical ou professionnel).
@@ -188,7 +259,6 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const img = n => `/cartes/${String(n).padStart(2,'0')}.webp`;
 const famOf = n => FAMILIES.find(f => n>=f.from && n<=f.to);
-const LIVRET = "https://livret-oracle-du-travail.vercel.app";
 
 let spread = 0, fam = 0, drawn = [];
 const params = new URLSearchParams(location.search);
@@ -277,7 +347,7 @@ function openCard(i){
   $('#mImg').src = img(n); $('#mImg').alt = `Carte n°${n} : ${c.titre}`;
   $('#mFam').textContent = `Famille ${f.id} · ${f.name}`;
   $('#mTitle').textContent = `${n}. ${c.titre}`;
-  $('#mPage').innerHTML = `Page ${c.page} du livret · <a href="${LIVRET}/#carte-${n}" target="_blank" rel="noopener" style="color:#8a6a33">voir dans le livret</a>`;
+  $('#mPage').textContent = `Page ${c.page} du livret`;
   $('#mPos').innerHTML = `<div class="posb">${s.n>1?'Position '+(i+1)+' : ':''}${esc(s.pos[i])}</div>`;
   $('#mKw').innerHTML = c.mots.split(/\s*,\s*/).filter(Boolean).map(k=>`<span>${esc(k)}</span>`).join('');
   $('#mMsg').textContent = c.message; $('#mAdv').textContent = c.conseil;
@@ -293,6 +363,33 @@ $('#mPrev').onclick = () => cur>0 && openCard(cur-1);
 $('#mNext').onclick = () => cur<drawn.length-1 && openCard(cur+1);
 document.addEventListener('keydown', e=>{ if(!$('#ov').classList.contains('open')) return;
   if(e.key==='Escape') closeCard(); if(e.key==='ArrowLeft'&&cur>0) openCard(cur-1); if(e.key==='ArrowRight'&&cur<drawn.length-1) openCard(cur+1); });
+
+/* ---- commande ---- */
+const ORDER_EMAIL = "energiesseline@gmail.com";
+$('#orderForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.target, st = $('#status'), btn = $('#sendBtn');
+  if (!f.checkValidity()) { f.reportValidity(); st.className='status err'; st.textContent='Merci de compléter les champs obligatoires (*).'; return; }
+  const data = Object.fromEntries(new FormData(f).entries());
+  if (data._honey) return;
+  delete data._honey;
+  const payload = {
+    _subject: `Nouvelle commande — L'oracle du travail (${data.quantite} jeu${data.quantite==='1'?'':'x'}) — ${data.nom}`,
+    _template: "table", _captcha: "false", _replyto: data.email,
+    ...data, source: "tirage-oracle-du-travail.vercel.app"
+  };
+  btn.disabled = true; st.className='status'; st.textContent = 'Envoi en cours…';
+  try {
+    const r = await fetch(`https://formsubmit.co/ajax/${ORDER_EMAIL}`, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(payload)});
+    const j = await r.json().catch(()=>({}));
+    if (!r.ok || String(j.success) === 'false') throw new Error(j.message || r.status);
+    f.hidden = true; $('#thanks').hidden = false;
+    $('#commander').scrollIntoView({behavior:'smooth'});
+  } catch (err) {
+    btn.disabled = false; st.className='status err';
+    st.innerHTML = `L'envoi n'a pas abouti. Vous pouvez écrire directement à <a href="mailto:${ORDER_EMAIL}?subject=${encodeURIComponent("Commande — L'oracle du travail")}">${ORDER_EMAIL}</a>.`;
+  }
+});
 </script>
 </body>
 </html>
